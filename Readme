@@ -1,0 +1,228 @@
+
+Project Overview
+This is a full-stack web application that allows users to submit authorization requests for medical treatments. The application has a frontend built using ReactJS and a backend built using Node.js, Express, and MongoDB. The frontend communicates with the backend using Axios to make HTTP requests.
+
+Features
+
+Submit authorization requests with patient details, treatment type, insurance plan, and doctor notes.
+Store and manage authorization requests in the backend using MongoDB.
+Backend API endpoints to handle the requests and persist data.
+Prerequisites
+
+To run this project, you need to have the following installed on your machine:
+
+Node.js (v14 or above)
+MongoDB (Make sure MongoDB is running locally or use a cloud MongoDB instance)
+npm (comes with Node.js)
+Installation and Setup
+
+Follow these steps to get the project up and running:
+
+1. Clone the repository
+
+git clone <your-repository-url>
+cd <your-project-directory>
+
+2. Install dependencies
+Frontend: Navigate to the frontend directory and install dependencies:
+
+cd frontend
+npm install
+
+Backend: Navigate to the backend directory and install dependencies:
+
+cd backend
+npm install
+
+3. Setup environment variables
+Create a .env file in the backend directory and add your MongoDB connection string:
+
+MONGO_URI=<your-mongodb-uri>
+PORT=5000
+
+4. Run the Application
+Frontend: Start the ReactJS frontend:
+
+cd frontend
+npm start
+The frontend will run on http://localhost:3000.
+
+Backend: Start the Node.js backend:
+
+cd backend
+npm run dev
+The backend will run on http://localhost:5000.
+
+5. Submit Authorization Requests
+Once both the frontend and backend are running, you can visit http://localhost:3000 to submit authorization requests.
+
+
+API Documentation
+Base URL: http://localhost:5000/api
+
+
+1. Get All Authorization Requests
+
+Endpoint: /api/authorization-requests
+Method: GET
+Description: Retrieve a list of all authorization requests, with patient details populated.
+
+Response:
+200 OK: Returns an array of authorization requests.
+500 Internal Server Error: If there's an issue fetching the data.
+
+Example Response:
+
+[
+  {
+    "_id": "64be74b295bc5a3b5e6c5b3f",
+    "patientId": {
+      "_id": "64be73c41ad9d52f54e742b9",
+      "name": "John Doe",
+      "age": 45,
+      "gender": "Male",
+      ...
+    },
+    "treatmentType": "Surgery",
+    "insurancePlan": "HealthPlus",
+    "dateOfService": "2024-10-01",
+    "diagnosisCode": "A00",
+    "doctorNotes": "Patient requires immediate surgery.",
+    "status": "Pending",
+    "createdAt": "2024-10-12T08:21:06.655Z",
+    "updatedAt": "2024-10-12T08:21:06.655Z",
+  }
+]
+
+2. Submit a New Authorization Request
+
+Endpoint: /api/authorization-requests
+Method: POST
+Description: Submit a new authorization request.
+
+Request Body:
+{
+  "patientId": "64be73c41ad9d52f54e742b9",
+  "treatmentType": "Surgery",
+  "insurancePlan": "HealthPlus",
+  "dateOfService": "2024-10-12",
+  "diagnosisCode": "A00",
+  "doctorNotes": "Patient requires immediate surgery."
+}
+
+Response:
+201 Created: Returns the created authorization request.
+400 Bad Request: If required fields are missing or invalid.
+
+Example Response:
+{
+  "_id": "64be74b295bc5a3b5e6c5b3f",
+  "patientId": "64be73c41ad9d52f54e742b9",
+  "treatmentType": "Surgery",
+  "insurancePlan": "HealthPlus",
+  "dateOfService": "2024-10-12",
+  "diagnosisCode": "A00",
+  "doctorNotes": "Patient requires immediate surgery.",
+  "status": "Pending",
+  "createdAt": "2024-10-12T08:21:06.655Z",
+  "updatedAt": "2024-10-12T08:21:06.655Z",
+}
+
+Patient API
+
+1. Get All Patients
+
+Endpoint: /api/patients
+Method: GET
+Description: Retrieve a list of all patients.
+
+Response:
+200 OK: Returns an array of patients.
+500 Internal Server Error: If there's an issue fetching the data.
+
+Example Response:
+[
+  {
+    "_id": "64be73c41ad9d52f54e742b9",
+    "name": "John Doe",
+    "age": 45,
+    "gender": "Male",
+    "diagnosis": "Diabetes",
+    "condition": "Chronic",
+    "medicalHistory": "Hypertension",
+    "treatmentPlan": "Daily insulin injections",
+    "createdAt": "2024-10-12T08:19:28.411Z",
+    "updatedAt": "2024-10-12T08:19:28.411Z",
+  }
+]
+
+2. Get Patient by ID
+
+Endpoint: /api/patients/:id
+Method: GET
+Description: Retrieve a single patient by their ID.
+
+URL Parameters:
+id: The ID of the patient to retrieve.
+
+Response:
+200 OK: Returns the patient details.
+404 Not Found: If the patient is not found.
+500 Internal Server Error: If there's an issue fetching the data.
+
+Example Response:
+{
+  "_id": "64be73c41ad9d52f54e742b9",
+  "name": "John Doe",
+  "age": 45,
+  "gender": "Male",
+  "diagnosis": "Diabetes",
+  "condition": "Chronic",
+  "medicalHistory": "Hypertension",
+  "treatmentPlan": "Daily insulin injections",
+  "createdAt": "2024-10-12T08:19:28.411Z",
+  "updatedAt": "2024-10-12T08:19:28.411Z",
+}
+
+3. Add a New Patient
+
+Endpoint: /api/patients
+Method: POST
+Description: Add a new patient to the system.
+
+Request Body:
+{
+  "name": "John Doe",
+  "age": 45,
+  "gender": "Male",
+  "diagnosis": "Diabetes",
+  "condition": "Chronic",
+  "medicalHistory": "Hypertension",
+  "treatmentPlan": "Daily insulin injections"
+}
+
+Response:
+201 Created: Returns the newly added patient.
+400 Bad Request: If required fields are missing or invalid.
+
+Example Response:
+{
+  "_id": "64be73c41ad9d52f54e742b9",
+  "name": "John Doe",
+  "age": 45,
+  "gender": "Male",
+  "diagnosis": "Diabetes",
+  "condition": "Chronic",
+  "medicalHistory": "Hypertension",
+  "treatmentPlan": "Daily insulin injections",
+  "createdAt": "2024-10-12T08:19:28.411Z",
+  "updatedAt": "2024-10-12T08:19:28.411Z",
+}
+
+Error Handling
+Common Error Responses
+
+400 Bad Request: Validation errors or missing required fields.
+404 Not Found: The requested resource could not be found (e.g., patient not found by ID).
+500 Internal Server Error: An unexpected server error occurred.
+
